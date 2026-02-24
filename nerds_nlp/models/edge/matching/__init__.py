@@ -1,3 +1,4 @@
+from .edge_matching_model import KKEdgeMatchingModel
 from .matrix_matcher import MatrixMatcher, MatrixMatchResult
 from .schemas import (
     CandidateExplainability,
@@ -13,6 +14,7 @@ __all__ = [
     "CandidateExplainability",
     "FieldConfig",
     "FieldScoreDetail",
+    "KKEdgeMatchingModel",
     "MatchingConfig",
     "MatchingContract",
     "MatchingExplanation",
