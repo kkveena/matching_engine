@@ -132,10 +132,6 @@ class KKEdgeMatchingModel:
         else:
             indices = list(range(n_candidates))
 
-        total_weight = sum(
-            fc.weight for fc in self.config.fields if fc.name in mr.used_fields
-        )
-
         candidates = []
         for idx in indices:
             field_details = []
