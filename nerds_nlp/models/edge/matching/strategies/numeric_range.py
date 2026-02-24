@@ -1,5 +1,7 @@
 from typing import Any
 
+import numpy as np
+
 from .base import BaseStrategy
 
 
@@ -28,3 +30,23 @@ class NumericRangeMatchStrategy(BaseStrategy):
         if diff >= self.tolerance:
             return 0.0
         return 1.0 - diff / self.tolerance
+
+    def score_many(self, input_value: Any, candidate_values: list[Any]) -> np.ndarray:
+        try:
+            iv = float(input_value)
+        except (TypeError, ValueError):
+            return np.zeros(len(candidate_values), dtype=np.float64)
+
+        # Convert candidates to float; non-numeric become NaN
+        cv_floats = np.empty(len(candidate_values), dtype=np.float64)
+        for i, cv in enumerate(candidate_values):
+            try:
+                cv_floats[i] = float(cv)
+            except (TypeError, ValueError):
+                cv_floats[i] = np.nan
+
+        diff = np.abs(cv_floats - iv)
+        scores = np.maximum(0.0, 1.0 - diff / self.tolerance)
+        # NaN diffs produce NaN scores; map to 0.0
+        scores = np.where(np.isnan(scores), 0.0, scores)
+        return scores
