@@ -1,0 +1,17 @@
+matching:
+  threshold: 0.85
+  fields:
+    - name: valuation_date
+      weight: 0.3
+      strategy: exact_match
+    - name: forward_rate
+      weight: 0.25
+      strategy: numeric_range
+      params:
+        tolerance: 0.01
+    - name: settlement_date
+      weight: 0.25
+      strategy: exact_match
+    - name: direction
+      weight: 0.2
+      strategy: direction_inverse
