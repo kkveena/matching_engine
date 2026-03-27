@@ -3,12 +3,16 @@ from typing import Any
 from .base import BaseStrategy
 from .direction_inverse import DirectionInverseMatchStrategy
 from .exact_match import ExactMatchStrategy
+from .fuzzy_match import FuzzyMatchStrategy
 from .numeric_range import NumericRangeMatchStrategy
+from .semantic_match import SemanticMatchStrategy
 
 _STRATEGY_REGISTRY: dict[str, type[BaseStrategy]] = {
     "exact_match": ExactMatchStrategy,
     "numeric_range": NumericRangeMatchStrategy,
     "direction_inverse": DirectionInverseMatchStrategy,
+    "fuzzy_match": FuzzyMatchStrategy,
+    "semantic_match": SemanticMatchStrategy,
 }
 
 
